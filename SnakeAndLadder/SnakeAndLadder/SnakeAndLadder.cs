@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace SnakeandLadderGame
 {
-    internal class SnakeandLadder
+    internal class SnakeAndLadder
     {
         private int Position = 0;
-        private bool WinningCheck = false;
-        private bool WinningCheck1 = false;
-        private int TotalDieRoll = 0;
-
 
         Random number = new Random();
         public void StartsGame()
@@ -23,16 +19,16 @@ namespace SnakeandLadderGame
 
         public void RandomNumber()
         {
-            TotalDieRoll++;
-            int CheckContinue = 0;
             int Number = number.Next(1, 7);
             Console.WriteLine("\nNumber on Dice " + Number);
-            if (WinningCheck is false)
-                CheckContinue = MovePlayer(Number);
-            if (WinningCheck is false && CheckContinue == 1)
-                Option(Number);
+            Position += Number;
             StartsGame();
+            Option(Number);
+            Console.ReadLine();
+            StartsGame();
+
         }
+
 
         public void Option(int Number)
         {
@@ -41,51 +37,36 @@ namespace SnakeandLadderGame
             {
                 case 0:
                     Console.WriteLine("No Play");
+                    Console.WriteLine("Your Position is same");
                     break;
+
                 case 1:
                     Console.WriteLine("You Got A Ladder!!");
                     Console.WriteLine("Moves Ahead by " + Number);
                     Position += Number;
+                    StartsGame();
                     break;
+
                 case 2:
                     Console.WriteLine("Oh No!! Snake Trap ");
                     Console.WriteLine("Moves Behind by " + Number);
                     Position -= Number;
+                    StartsGame();
                     break;
+
                 default:
                     Console.WriteLine("Error!!");
                     break;
             }
         }
-        private int Check(int displacement)
-        {
-            if (Position < 0)
-            {
-                Position = 0;
-                return 0;
-            }
-            else if (Position > 100)
-            {
-                Position -= displacement;
-                Console.WriteLine("Oops! Your Position Is More Than 100");
-                Console.WriteLine("You are moved Behind to previous position");
-                return 0;
-            }
-            else
-                return 1;
-        }
-        private int MovePlayer(int displacement)
-        {
-            Position += displacement;
-            if (Position == 100)
-            {
-                WinningCheck = true;
-                return 0;
-            }
-            return Check(displacement);
-        }
 
         public void TillWin()
+        {
+            while (Position < 100) ;
+            RandomNumber();
+            Console.WriteLine("\nCongratulations!! You Won!!");
+        }
+        public void TillWin1()
         {
             while (Position < 100)
                 RandomNumber();
@@ -94,15 +75,5 @@ namespace SnakeandLadderGame
 
         }
 
-        public void Win()
-        {
-            while (WinningCheck is false)
-                RandomNumber();
-            Console.WriteLine("Die was rolled " + TotalDieRoll + " times");
-
-        }
-
-
     }
-
 }

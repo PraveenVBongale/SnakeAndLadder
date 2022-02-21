@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace SnakeandLadderGame
 {
-    internal class SnakeAndLadder
+    internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("WELCOME TO SNAKE & LADDER PLAY");
-            SnakeandLadder snake = new SnakeandLadder();
+            Console.WriteLine("Welcome To Snake And Ladder Game");
+            SnakeAndLadder snake = new SnakeAndLadder();
             snake.StartsGame();
             snake.RandomNumber();
             snake.TillWin();
-            snake.Win();
             Console.ReadLine();
         }
     }
